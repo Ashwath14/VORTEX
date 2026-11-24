@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Vortex Speed // Autonomous Network Intelligence Platform</title>
+  <link rel="icon" type="image/png" href="vortex_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=8.1">
+</head>
+<body class="theme-obsidian">
+  <!-- Subtle Ambient Glows -->
+  <div class="ambient-glow glow-blue"></div>
+  <div class="ambient-glow glow-violet"></div>
+
+  <!-- Main Application Shell: Sidebar + Content Canvas -->
+  <div class="app-layout">
+    
+    <!-- LEFT NAVIGATION SIDEBAR (12 Modules) -->
+    <aside class="app-sidebar">
+      <!-- Sidebar Brand -->
+      <div class="sidebar-brand">
+        <div class="brand-coin">
+          <img src="vortex_logo.png" alt="Vortex Speed Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-details">
+          <div class="brand-text">VORTEX <span class="badge-v8">v8.0</span></div>
+          <div class="brand-sub">TITANIUM PRO</div>
+        </div>
+      </div>
+
+      <!-- Navigation Module List -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">CORE OPERATIONS</div>
+        <button class="nav-item active" data-target="module-overview">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Overview</span>
+        </button>
+        <button class="nav-item" data-target="module-speed">
+          <span class="nav-icon">⚡</span>
+          <span class="nav-label">Speed &amp; Diagnostics</span>
+        </button>
+        <button class="nav-item" data-target="module-nova">
+          <span class="nav-icon">⬡</span>
+          <span class="nav-label">NOVA Intelligence</span>
+          <span class="nav-indicator-dot" id="nova-nav-dot"></span>
+        </button>
+
+        <div class="nav-section-title">EXPLORATION &amp; AUDIT</div>
+        <button class="nav-item" data-target="module-explorer">
+          <span class="nav-icon">🌐</span>
+          <span class="nav-label">Network Explorer</span>
+        </button>
+        <button class="nav-item" data-target="module-settings">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-label">Settings &amp; Reports</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Status Mini-Footer -->
+      <div class="sidebar-status">
+        <div class="status-indicator">
+          <span class="live-pulse"></span>
+          <span id="sb-adapter-name">WiFi: TP-Link Adapter</span>
+        </div>
+        <div class="status-meta" id="sb-ip-meta">192.168.29.129 (100% Signal)</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT WORKSPACE STAGE -->
+    <div class="app-main">
+      
+      <!-- Top Persistent Control Bar -->
+      <header class="app-topbar">
+        <!-- Natural Language Command Console -->
+        <div class="command-bar-wrapper">
+          <span class="cmd-icon">⚡</span>
+          <input type="text" id="command-input" placeholder="Type a command (e.g. 'why is internet slow', 'activate gaming mode', 'devices')..." autocomplete="off">
+          <button id="voice-cmd-btn" class="voice-btn" title="Toggle Voice Command Listening">
+            <span id="voice-icon">🎙️</span>
+          </button>
+          <button id="run-cmd-btn" class="cmd-exec-btn">Run</button>
+        </div>
+
+        <!-- Top Right System Actions -->
+        <div class="topbar-actions">
+          <!-- Global Command Search (Ctrl+K) -->
+          <button id="palette-open-btn" class="action-pill-btn" title="Open Global Command Palette (Ctrl+K)">
+            <span>🔍 Search (Ctrl+K)</span>
+          </button>
+
+          <!-- Keyboard Shortcuts Reference -->
+          <button id="shortcuts-modal-btn" class="action-pill-btn" title="Keyboard Shortcuts Reference (?)">
+            <span>⌨️ Shortcuts</span>
+          </button>
+
+          <!-- Theme Mode Selector -->
+          <div class="theme-selector-box" title="Interface Theme Mode">
+            <span class="plan-label">THEME:</span>
+            <select id="theme-select" class="luxury-select">
+              <option value="dark">🌑 Dark</option>
+              <option value="light">☀️ Light</option>
+              <option value="system">🖥️ System</option>
+            </select>
+          </div>
+
+          <!-- Quick Check Action -->
+          <button id="quick-check-btn" class="action-pill-btn" title="Run Quick 2-Second 4-Pillar Internet Check">
+            <span>🩺 Quick Check</span>
+          </button>
+
+          <!-- Network Status Action -->
+          <button id="net-status-btn" class="action-pill-btn" title="View Active Adapter &amp; Live Telemetry">
+            <span>📊 Status</span>
+          </button>
+
+          <!-- ISP Plan Selector (Dynamic Capacity Scaling) -->
+          <div class="plan-selector-box" title="ISP Plan Bandwidth Ceiling">
+            <span class="plan-label">PLAN:</span>
+            <select id="plan-select" class="luxury-select">
+              <option value="30">30 Mbps</option>
+              <option value="100">100 Mbps</option>
+              <option value="150">150 Mbps</option>
+              <option value="300">300 Mbps</option>
+              <option value="1000">1 Gbps</option>
+              <option value="auto">Auto-Scale</option>
+            </select>
+          </div>
+
+          <!-- Desktop Mini HUD Toggle -->
+          <button id="toggle-mini-hud-btn" class="action-pill-btn" title="Toggle Compact Desktop Mini HUD">
+            <span>📌 Mini HUD</span>
+          </button>
+
+          <!-- Audio Toggle -->
+          <button id="sound-btn" class="icon-toggle-btn" title="Toggle Tactile Audio">
+            <span id="sound-icon">🔊</span>
+          </button>
+
+          <!-- Turbo Boost -->
+          <button id="turbo-btn" class="turbo-glow-btn" title="Lock 1.0ms Multimedia Timer &amp; Tixati Priority">
+            <span>⚡ Turbo Boost</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Sub-Bar: Live System Telemetry Ticker -->
+      <div class="telemetry-ticker-bar">
+        <div class="ticker-left">
+          <span class="status-chip chip-online">AUTONOMOUS MONITOR ACTIVE</span>
+          <span class="ticker-item">JioFiber Gateway: <strong class="text-cyan font-mono" id="tb-gw-ping">2 ms</strong></span>
+          <span class="ticker-sep">•</span>
+          <span class="ticker-item">Cloudflare Edge: <strong class="text-emerald font-mono" id="tb-cf-ping">16 ms</strong></span>
+          <span class="ticker-sep">•</span>
+          <span class="ticker-item">Timer: <strong class="text-violet font-mono">1.0 ms (Active)</strong></span>
+          <span class="ticker-sep">•</span>
+          <span class="ticker-item">Tixati: <strong class="text-amber font-mono" id="tb-tixati-state">High Priority</strong></span>
+        </div>
+        <div class="ticker-right">
+          <span class="ticker-item">Today: <strong class="text-cyan font-mono" id="tb-today-gb">28.5 GB</strong></span>
+          <span class="ticker-sep">•</span>
+          <span class="ticker-item">Month: <strong class="text-violet font-mono" id="tb-month-gb">92.2 GB</strong></span>
+        </div>
+      </div>
+
+      <!-- Content Views (12 Modules) -->
+      <div class="workspace-viewport">
+
+        <!-- ================= 1. OVERVIEW ================= -->
+        <section id="module-overview" class="view-panel active">
+          <div class="dashboard-grid">
+            
+            <!-- Hero Dual Hardware Telemetry -->
+            <div class="panel-card hero-telemetry-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📊</span>
+                  <span class="header-text">CONTINUOUS ADAPTER THROUGHPUT</span>
+                </div>
+                <span class="chip-live">LIVE HARDWARE SAMPLING</span>
+              </div>
+
+              <div class="dual-meters-row">
+                <!-- Download Card -->
+                <div class="meter-box down-box">
+                  <div class="meter-meta">
+                    <span class="meter-tag"><span class="arrow-down">↓</span> CONTINUOUS DOWNLOAD</span>
+                    <span class="meter-state text-cyan">ACTIVE STREAM</span>
+                  </div>
+                  <div class="meter-main-number text-cyan">
+                    <span id="ov-down-mbps">33.33</span>
+                    <span class="meter-unit">Mbps</span>
+                  </div>
+                  <div class="meter-sub-number text-slate">
+                    <span id="ov-down-mb">3.98 MB/s</span> (Actual Transfer Rate)
+                  </div>
+                  <div class="meter-track">
+                    <div id="ov-bar-down" class="meter-fill fill-cyan" style="width: 100%;"></div>
+                  </div>
+                  <div class="meter-foot">
+                    <span>Line Saturation:</span>
+                    <strong class="text-cyan" id="ov-sat-down">100% Saturated</strong>
+                  </div>
+                </div>
+
+                <!-- Upload Card -->
+                <div class="meter-box up-box">
+                  <div class="meter-meta">
+                    <span class="meter-tag"><span class="arrow-up">↑</span> CONTINUOUS UPLOAD</span>
+                    <span class="meter-state text-violet">UPLINK PIPE</span>
+                  </div>
+                  <div class="meter-main-number text-violet">
+                    <span id="ov-up-mbps">9.15</span>
+                    <span class="meter-unit">Mbps</span>
+                  </div>
+                  <div class="meter-sub-number text-slate">
+                    <span id="ov-up-mb">1.14 MB/s</span> (P2P ACK Flow)
+                  </div>
+                  <div class="meter-track">
+                    <div id="ov-bar-up" class="meter-fill fill-violet" style="width: 32%;"></div>
+                  </div>
+                  <div class="meter-foot">
+                    <span>Uplink Pipe:</span>
+                    <strong class="text-violet">Unthrottled</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 60-Second Real-Time Dual-Line Waveform -->
+              <div class="waveform-box">
+                <div class="wave-meta-row">
+                  <span class="wave-heading">60-Second Real-Time Network Activity</span>
+                  <div class="wave-legend">
+                    <span class="leg-item"><span class="leg-dot bg-cyan"></span> Download</span>
+                    <span class="leg-item"><span class="leg-dot bg-violet"></span> Upload</span>
+                    <span class="leg-item"><span class="leg-line bg-rose"></span> <span id="ov-cap-tag">30M Cap</span></span>
+                  </div>
+                </div>
+                <canvas id="ovWaveCanvas" width="700" height="130"></canvas>
+              </div>
+            </div>
+
+            <!-- NOVA Autonomous Assistant Mini-Pod -->
+            <div class="panel-card nova-overview-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">⬡</span>
+                  <span class="header-text">NOVA AUTONOMOUS ADVISOR</span>
+                </div>
+                <span class="chip-active" id="ov-nova-badge">ONLINE</span>
+              </div>
+
+              <div class="nova-briefing-box">
+                <div class="nova-briefing-text" id="ov-nova-text">
+                  "Hi Karthikeya! All network adapters are operating at 100% capacity. Tixati is locked to High Priority."
+                </div>
+                <div class="nova-rec-box">
+                  <span class="rec-label">INTELLIGENT RECOMMENDATION:</span>
+                  <div class="rec-content" id="ov-nova-rec">
+                    Optimal throughput detected on 2.4 GHz Channel 6. Zero packet collisions observed.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Action Pills -->
+              <div class="overview-quick-actions">
+                <button class="quick-action-btn" id="ov-btn-game">🎮 Launch Game QoS</button>
+                <button class="quick-action-btn" id="ov-btn-test">🚀 Run Diagnostics</button>
+                <button class="quick-action-btn" id="ov-btn-report">📋 Export Report</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      <section id="module-speed" class="view-panel">
+
+        <!-- Pillar 2 Subtabs: Flagship Speed + Advanced Diagnostics Labs -->
+        <div class="pillar-subtabs" id="speed-subtabs">
+          <button class="subtab-btn active" data-subtab="speed-tab-main">🚀 Speed Test</button>
+          <button class="subtab-btn" data-subtab="speed-tab-bufferbloat">⏱️ Bufferbloat Lab</button>
+          <button class="subtab-btn" data-subtab="speed-tab-routevision">🛰️ Route Vision</button>
+          <button class="subtab-btn" data-subtab="speed-tab-gaming">🎮 Gaming Latency</button>
+        </div>
+
+        <!-- Subtab 1: Main Speed Test Engine -->
+        <div id="speed-tab-main" class="subtab-content active">
+          
+          <div class="diagnostics-layout">
+            
+            <!-- Left: High-Precision Dial & Telemetry Hub -->
+            <div class="panel-card gauge-panel">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">⚡</span>
+                  <span class="header-text">MULTI-STREAM SPEED DIAGNOSTIC</span>
+                  <span class="hud-tech-badge">CORE.ARC // v8.0</span>
+                </div>
+                <div class="server-control-cluster">
+                  <select id="speed-server-select" class="speed-server-dropdown" title="Select Verified Measurement Server">
+                    <option value="cloudflare-mumbai">Cloudflare BOM • Mumbai</option>
+                    <option value="cloudflare-delhi">Cloudflare DEL • Delhi</option>
+                    <option value="cloudflare-global">Cloudflare Anycast</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Distinct Historical Baseline vs Active Test Banner -->
+              <div id="diag-last-test-banner" class="diag-last-test-banner">
+                <div class="last-test-badge">
+                  <span class="pulse-beacon green"></span>
+                  <span class="last-test-label">LAST SUCCESSFUL TEST</span>
+                </div>
+                <div class="last-test-data" id="diag-last-test-data">
+                  <span class="text-slate font-mono">Loading baseline record...</span>
+                </div>
+              </div>
+
+              <div class="svg-gauge-stage">
+                <svg class="dial-svg" viewBox="0 0 320 320">
+                  <defs>
+                    <linearGradient id="dialGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#B9774E" />
+                      <stop offset="100%" stop-color="#E58A48" />
+                    </linearGradient>
+                    <radialGradient id="reactorCoreGrad" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#292D31" stop-opacity="0.8" />
+                      <stop offset="70%" stop-color="#202326" stop-opacity="0.3" />
+                      <stop offset="100%" stop-color="#151719" stop-opacity="0" />
+                    </radialGradient>
+                    <filter id="dialGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="5" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+
+                  <!-- Precision Outer Machined Bezel -->
+                  <circle class="dial-outer-bezel" cx="160" cy="160" r="154" fill="none" stroke="#383E43" stroke-width="1.2" />
+                  
+                  <!-- Precision Radial Tick Ring -->
+                  <circle class="dial-orbit-outer" cx="160" cy="160" r="142" fill="none" stroke="#292D31" stroke-width="1.2" stroke-dasharray="3 7" />
+
+                  <!-- Dial Track Ring (Dark Titanium Channel) -->
+                  <circle class="dial-track" cx="160" cy="160" r="120" />
+
+                  <!-- Active Dial Ember Fill -->
+                  <circle id="dialArc" class="dial-fill" cx="160" cy="160" r="120" />
+
+                  <!-- Inner Bezel Ring -->
+                  <circle class="dial-inner-ring" cx="160" cy="160" r="98" fill="none" stroke="#292D31" stroke-width="1.2" />
+
+                  <!-- Core Precision Shading -->
+                  <circle class="dial-core-vignette" cx="160" cy="160" r="76" fill="url(#reactorCoreGrad)" />
+                </svg>
+
+                <!-- Center Interactive Core (Mutually Exclusive Centered Overlays) -->
+                <div class="dial-center">
+                  <button id="diag-start-btn" class="dial-action-btn">
+                    <span class="dial-bolt">⚡</span>
+                    <span class="dial-btn-text">START TEST</span>
+                    <span class="dial-btn-sub">CLICK TO TEST</span>
+                  </button>
+
+                  <div id="diag-hud" class="dial-hud hidden">
+                    <div id="diag-phase-chip" class="diag-phase">READY</div>
+                    <div class="diag-number"><span id="diag-speed-num">0.0</span></div>
+                    <div class="diag-units">
+                      <span class="unit-main font-bold">Mbps</span>
+                      <span class="unit-pipe">|</span>
+                      <span class="unit-sub text-slate font-mono" id="diag-mb-num">0.00 MB/s</span>
+                    </div>
+                    <div id="diag-hud-status" class="diag-status-sub">AWAITING TEST EXECUTION</div>
+                  </div>
+                </div>
+
+                <div class="dial-scale-tag" id="diag-scale-label">SCALE: 0 - 40 Mbps</div>
+              </div>
+
+              <!-- Active Test Telemetry Header -->
+              <div class="quad-row-header">
+                <span class="quad-header-tag" id="diag-active-test-tag">CURRENT TEST: READY</span>
+                <span class="quad-header-hint text-slate font-mono">REAL-TIME TELEMETRY</span>
+              </div>
+
+              <!-- Quad Telemetry Pods -->
+              <div class="quad-telemetry-row">
+                <div class="quad-box">
+                  <span class="q-label">PING</span>
+                  <div class="q-val text-cyan" id="diag-ping">-- <small>ms</small></div>
+                  <span class="q-sub text-emerald" id="diag-ping-sub">Gateway: 3ms • WAN: 23ms</span>
+                </div>
+                <div class="quad-box">
+                  <span class="q-label">JITTER</span>
+                  <div class="q-val text-violet" id="diag-jitter">-- <small>ms</small></div>
+                  <span class="q-sub text-slate" id="diag-jitter-sub">RFC 3550 Standard</span>
+                </div>
+                <div class="quad-box quad-highlight">
+                  <span class="q-label">DOWNLOAD</span>
+                  <div class="q-val text-emerald" id="diag-down">-- <small>Mbps</small></div>
+                  <span class="q-sub text-slate" id="diag-down-mb">-- MB/s</span>
+                </div>
+                <div class="quad-box quad-highlight">
+                  <span class="q-label">UPLOAD</span>
+                  <div class="q-val text-amber" id="diag-up">-- <small>Mbps</small></div>
+                  <span class="q-sub text-slate" id="diag-up-mb">-- MB/s</span>
+                </div>
+              </div>
+
+              <div class="diag-retest-row">
+                <button id="diag-retest-btn" class="retest-btn">🔄 Retest Connection</button>
+                <button id="diag-cancel-btn" class="action-pill-btn hidden" style="border-color: var(--rose); color: var(--rose); font-weight: 600;" title="Abort Active Speed Test">🛑 Cancel</button>
+                <button id="diag-cross-btn" class="action-pill-btn" title="Compare Cloudflare BOM vs Global Anycast">⚖️ Cross-Server Check</button>
+                <button id="diag-details-btn" class="action-pill-btn" title="View Full Technical Telemetry &amp; Verification">📋 Details</button>
+              </div>
+
+              <!-- Collapsible Measurement Details Drawer -->
+              <div id="diag-details-drawer" class="diag-drawer hidden">
+                <div class="drawer-header">
+                  <span class="drawer-title">🔍 GENUINE MEASUREMENT DETAILS</span>
+                  <button id="close-details-btn" class="drawer-close-btn">&times;</button>
+                </div>
+                <div class="drawer-grid">
+                  <div class="drawer-item"><span class="d-label">Test ID</span><strong class="d-val text-cyan font-mono" id="dt-id">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Timestamp</span><strong class="d-val text-slate font-mono" id="dt-time">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Active Server</span><strong class="d-val text-emerald" id="dt-server">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Server Location</span><strong class="d-val text-slate" id="dt-loc">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Sustained Down</span><strong class="d-val text-emerald font-mono" id="dt-sustained-down">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Peak Down</span><strong class="d-val text-cyan font-mono" id="dt-peak-down">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Bytes Downloaded</span><strong class="d-val text-slate font-mono" id="dt-bytes-down">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Bytes Uploaded</span><strong class="d-val text-slate font-mono" id="dt-bytes-up">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Ping Min / Avg / Max</span><strong class="d-val text-violet font-mono" id="dt-ping-spread">--</strong></div>
+                  <div class="drawer-item"><span class="d-label">Packet Loss</span><strong class="d-val text-amber font-mono" id="dt-packet-loss">0%</strong></div>
+                </div>
+                <div class="drawer-note" id="dt-note">
+                  ℹ️ Throughput calculated as sustained (Bytes &times; 8) / (Time &times; 1,000,000) over 4 parallel streams. Real 2.4 GHz Wi-Fi conditions typical range is 18–26 Mbps.
+                </div>
+              </div>
+
+              <!-- Collapsible Cross-Server Accuracy Check Drawer -->
+              <div id="diag-cross-drawer" class="diag-drawer hidden">
+                <div class="drawer-header">
+                  <span class="drawer-title">⚖️ CROSS-SERVER ACCURACY CHECK</span>
+                  <button id="close-cross-btn" class="drawer-close-btn">&times;</button>
+                </div>
+                <div id="cross-status-banner" class="cross-status-banner">Benchmark Cloudflare Mumbai (Raw Line Capacity) vs Cloudflare Delhi (National Transit).</div>
+                <div class="cross-cards-row">
+                  <div class="cross-card">
+                    <span class="cross-badge">SERVER A</span>
+                    <h4 class="cross-server-name">Cloudflare Edge (BOM)</h4>
+                    <div class="cross-metric">Down: <strong class="text-emerald" id="cs-a-down">-- Mbps</strong></div>
+                    <div class="cross-metric">Up: <strong class="text-amber" id="cs-a-up">-- Mbps</strong></div>
+                    <div class="cross-metric">Ping: <strong class="text-cyan" id="cs-a-ping">-- ms</strong></div>
+                  </div>
+                  <div class="cross-card">
+                    <span class="cross-badge">SERVER B</span>
+                    <h4 class="cross-server-name">Cloudflare Edge (DEL)</h4>
+                    <div class="cross-metric">Down: <strong class="text-emerald" id="cs-b-down">-- Mbps</strong></div>
+                    <div class="cross-metric">Up: <strong class="text-amber" id="cs-b-up">-- Mbps</strong></div>
+                    <div class="cross-metric">Ping: <strong class="text-cyan" id="cs-b-ping">-- ms</strong></div>
+                  </div>
+                </div>
+                <div id="cross-explanation" class="cross-explanation hidden"></div>
+                <div class="cross-actions">
+                  <button id="start-cross-test-btn" class="turbo-glow-btn">⚡ Run Cross-Server Benchmark</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Server Info, Historical Speed Chart, & Detailed Test Records -->
+            <div class="panel-card diag-history-panel">
+              <!-- Server Meta Pod -->
+              <div class="diag-server-meta">
+                <div class="server-meta-item">
+                  <span class="server-meta-label">Selected Server</span>
+                  <div class="server-meta-val text-cyan">Cloudflare Edge (BOM)</div>
+                  <span class="server-meta-sub">Mumbai, India • 16 ms</span>
+                </div>
+                <div class="server-meta-item">
+                  <span class="server-meta-label">ISP Gateway</span>
+                  <div class="server-meta-val text-emerald">Reliance JioFiber</div>
+                  <span class="server-meta-sub">192.168.29.1 • Channel 6</span>
+                </div>
+                <div class="server-meta-item">
+                  <span class="server-meta-label">Protocol</span>
+                  <div class="server-meta-val text-violet">TCP Multi-Stream</div>
+                  <span class="server-meta-sub">8 Parallel Sockets</span>
+                </div>
+              </div>
+
+              <!-- Compact Historical Speed Chart -->
+              <div class="diag-chart-section">
+                <div class="diag-chart-header">
+                  <span class="diag-chart-title">HISTORICAL THROUGHPUT CURVE (SQLITE)</span>
+                  <div class="diag-chart-legend">
+                    <span class="leg-item"><span class="leg-dot bg-cyan"></span> Download</span>
+                    <span class="leg-item"><span class="leg-dot bg-violet"></span> Upload</span>
+                  </div>
+                </div>
+                <div class="diag-chart-canvas-wrapper">
+                  <canvas id="speedTrendCanvas" width="600" height="120"></canvas>
+                </div>
+              </div>
+
+              <!-- Speed History Table -->
+              <div class="diag-table-section">
+                <div class="panel-header" style="margin-bottom: 8px;">
+                  <div class="header-title-box">
+                    <span class="header-icon">📜</span>
+                    <span class="header-text">RECENT SPEED TEST RECORDS</span>
+                    <span class="badge-v8" id="speed-test-count">0 Records</span>
+                  </div>
+                  <button id="clear-speed-hist-btn" class="mini-btn">Clear History</button>
+                </div>
+
+                <div class="table-scroll-container">
+                  <table class="luxury-table" id="diag-history-table">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Download</th>
+                        <th>Upload</th>
+                        <th>Ping</th>
+                        <th>Jitter</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="diag-history-tbody">
+                      <tr><td colspan="6" class="text-center text-slate">Loading history...</td></tr>
+                    </tbody>
+                  </table>
+                  <div id="diag-empty-state" class="table-empty-state" style="display: none;">
+                    <div class="empty-icon">⚡</div>
+                    <div class="empty-title">NO SPEED TEST RECORDS YET</div>
+                    <div class="empty-desc">Click "Start Test" to perform a multi-stream diagnostic and record persistent benchmarks to SQLite.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        
+          
+          <!-- Integrated Utilities: Bandwidth Download Estimator & ISP SLA Summary -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; margin-top: 20px;">
+            
+          <div class="prediction-layout">
+            
+            <!-- Left: 60 GB Game Download ETA Engine -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🎮</span>
+                  <span class="header-text">LIVE 60 GB GAME DOWNLOAD CALCULATOR</span>
+                </div>
+                <span class="chip-live">LIVE THROUGHPUT SYNC</span>
+              </div>
+
+              <div class="pred-hero-eta">
+                <span class="pred-label">ESTIMATED COMPLETION TIME</span>
+                <div class="pred-val text-emerald" id="pred-eta-num">4h 05m</div>
+                <span class="pred-sub text-cyan" id="pred-eta-sub">At active throughput of 33.3 Mbps (4.16 MB/s)</span>
+              </div>
+
+              <div class="pred-savings-banner">
+                <div class="sav-col">
+                  <span>Unthrottled 2 Mbps:</span>
+                  <strong class="text-rose font-mono">~68 Hours</strong>
+                </div>
+                <div class="sav-col">
+                  <span>Vortex Speed (33 Mbps):</span>
+                  <strong class="text-emerald font-mono">~4 Hours</strong>
+                </div>
+                <div class="sav-col">
+                  <span>Time Saved:</span>
+                  <strong class="text-amber">64 HOURS FASTER!</strong>
+                </div>
+              </div>
+
+              <div class="pred-slider-box">
+                <div class="slider-header-row">
+                  <span>Calculate Custom Size:</span>
+                  <span class="text-cyan font-mono font-bold" id="pred-slider-val">60 GB</span>
+                </div>
+                <input type="range" id="pred-file-slider" min="1" max="250" value="60" class="luxury-range">
+              </div>
+            </div>
+
+            <!-- Right: 7-Day & Month-End Forecasting -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📈</span>
+                  <span class="header-text">MONTH-END USAGE FORECAST</span>
+                </div>
+              </div>
+
+              <div class="forecast-pods-grid">
+                <div class="fc-pod">
+                  <span class="fc-label">DAILY BURN RATE</span>
+                  <div class="fc-val text-cyan" id="fc-burn-rate">28.5 GB/day</div>
+                  <span class="fc-sub text-slate">Active Torrent Traffic</span>
+                </div>
+                <div class="fc-pod">
+                  <span class="fc-label">PROJECTED MONTH CONSUMPTION</span>
+                  <div class="fc-val text-violet" id="fc-month-total">420.5 GB</div>
+                  <span class="fc-sub text-emerald">Unlimited Fiber Plan</span>
+                </div>
+              </div>
+
+              <div class="pred-insights-box">
+                <div class="insight-heading">AUTONOMOUS FORECAST INSIGHTS:</div>
+                <ul class="insight-list" id="pred-insights-list">
+                  <!-- Dynamic insights -->
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        
+            
+          <div class="isp-layout">
+            
+            <div class="panel-card isp-score-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🏆</span>
+                  <span class="header-text">WEIGHTED ISP PERFORMANCE SCORE (0–100)</span>
+                </div>
+                <span class="chip-live">CONTINUOUS EVALUATION</span>
+              </div>
+
+              <div class="isp-score-hero">
+                <div class="score-circle">
+                  <span class="score-number" id="isp-score-num">96</span>
+                  <span class="score-grade text-emerald" id="isp-grade-num">GRADE A+</span>
+                </div>
+                <div class="score-meta">
+                  <div class="isp-provider-name" id="isp-provider-name">Reliance JioFiber Broadband</div>
+                  <div class="isp-plan-name text-slate" id="isp-plan-name">30 Mbps Symmetrical Unlimited Fiber</div>
+                  <p class="isp-score-summary">Performance score evaluated against physical throughput, jitter stability, gateway latency, and packet loss.</p>
+                </div>
+              </div>
+
+              <div class="isp-weights-grid" id="isp-weights-grid">
+                <!-- Populated via /api/isp -->
+              </div>
+            </div>
+
+          </div>
+        
+          </div>
+
+        </div>
+
+        <!-- Subtab 2: Bufferbloat Autopsy Lab -->
+        <div id="speed-tab-bufferbloat" class="subtab-content">
+          
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">⏱️</span>
+                <span class="header-text">BUFFERBLOAT AUTOPSY // ACTIVE LATENCY DEGRADATION PROFILER</span>
+              </div>
+              <div class="header-actions">
+                <div class="time-range-pills" id="bb-mode-selector">
+                  <button class="range-pill active" data-mode="standard">Standard (8s)</button>
+                  <button class="range-pill" data-mode="quick">Quick (3s)</button>
+                  <button class="range-pill" data-mode="thorough">Thorough (15s)</button>
+                </div>
+                <button id="bb-start-btn" class="action-pill-btn bg-cyan" style="color: #0B0F19; font-weight: 700;">⚡ Start Diagnostic</button>
+                <button id="bb-cancel-btn" class="action-pill-btn bg-rose hidden" style="color: #fff; font-weight: 700;">✕ Cancel</button>
+              </div>
+            </div>
+
+            <p class="section-desc">
+              Measures genuine latency inflation (bufferbloat) during saturated line utilization. Categorizes network queuing from A+ to F and computes precise Smart Queue Management (SQM) router bandwidth thresholds.
+            </p>
+
+            <!-- Progress & Active Phase Banner -->
+            <div id="bb-progress-card" class="bb-status-card" style="margin-bottom: 16px; display: none;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 13px; font-weight: 700; color: #00D9FF;" id="bb-phase-label">PHASE: IDLE BASELINE</span>
+                <span style="font-size: 12px; font-family: var(--font-mono); color: #94A3B8;" id="bb-progress-percent">0%</span>
+              </div>
+              <div class="bb-progress-track">
+                <div class="bb-progress-fill" id="bb-progress-bar" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- 3-Phase Latency Metrics -->
+            <div class="overview-dual-meters">
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">1. IDLE BASELINE</span>
+                  <span class="meter-sub">UNLOADED</span>
+                </div>
+                <div class="meter-main-val text-cyan" id="bb-idle-val">-- ms</div>
+                <div class="meter-note text-slate">Unloaded round-trip ping to gateway/edge</div>
+              </div>
+
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">2. DOWNLOAD LOADED</span>
+                  <span class="meter-sub" id="bb-down-delta">+0 ms</span>
+                </div>
+                <div class="meter-main-val text-amber" id="bb-down-val">-- ms</div>
+                <div class="meter-note text-slate">Ping while saturating downstream bandwidth</div>
+              </div>
+
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">3. UPLOAD LOADED</span>
+                  <span class="meter-sub" id="bb-up-delta">+0 ms</span>
+                </div>
+                <div class="meter-main-val text-violet" id="bb-up-val">-- ms</div>
+                <div class="meter-note text-slate">Ping while saturating upstream bandwidth</div>
+              </div>
+            </div>
+
+            <!-- Grade Card & SQM Router Optimization Recommendations -->
+            <div class="bb-grade-sqm-grid" style="display: grid; grid-template-columns: 240px 1fr; gap: 16px; margin-top: 16px;">
+              <!-- Grade Badge Card -->
+              <div class="panel-card text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;">
+                <div class="bb-grade-circle" id="bb-grade-circle">
+                  <span id="bb-grade-letter">--</span>
+                </div>
+                <div style="font-weight: 700; font-size: 15px; margin-top: 12px; color: #fff;" id="bb-grade-title">NO RECENT TEST</div>
+                <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;" id="bb-grade-desc">Run a test to profile latency degradation</div>
+              </div>
+
+              <!-- SQM Router Recommendation Card -->
+              <div class="panel-card">
+                <div class="panel-header">
+                  <div class="header-title-box">
+                    <span class="header-icon">🎛️</span>
+                    <span class="header-text">ROUTER SMART QUEUE MANAGEMENT (SQM) PROFILE</span>
+                  </div>
+                  <span class="status-pill pill-cyan font-mono" id="bb-sqm-badge">CAKE / FQ-CODEL</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                  <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Optimal Downstream SQM</div>
+                    <div style="font-size: 20px; font-weight: 800; color: #10B981; font-family: var(--font-mono);" id="bb-sqm-down">-- Mbps</div>
+                    <div style="font-size: 11px; color: #64748B;">85% bandwidth reservation</div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Optimal Upstream SQM</div>
+                    <div style="font-size: 20px; font-weight: 800; color: #00D9FF; font-family: var(--font-mono);" id="bb-sqm-up">-- Mbps</div>
+                    <div style="font-size: 11px; color: #64748B;">85% bandwidth reservation</div>
+                  </div>
+                </div>
+                <p style="font-size: 13px; color: #CBD5E1; line-height: 1.5;" id="bb-sqm-notes">
+                  Configure these rates in your router's QoS/SQM settings to eliminate buffer-induced latency spikes during simultaneous downloads or uploads.
+                </p>
+              </div>
+            </div>
+
+            <!-- Live Bufferbloat Latency Curve Canvas -->
+            <div class="panel-card" style="margin-top: 16px;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📈</span>
+                  <span class="header-text">LIVE REAL-TIME LATENCY TIMELINE (IDLE vs LOADED)</span>
+                </div>
+              </div>
+              <div class="tm-chart-wrapper">
+                <canvas id="bbChartCanvas" width="900" height="180"></canvas>
+              </div>
+            </div>
+
+            <!-- Bufferbloat History Table -->
+            <div class="panel-card" style="margin-top: 16px;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📜</span>
+                  <span class="header-text">BUFFERBLOAT AUDIT LOGS (SQLITE ARCHIVE)</span>
+                </div>
+              </div>
+              <div class="guardian-table-container">
+                <table class="guardian-table">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Mode</th>
+                      <th>Idle Ping</th>
+                      <th>Download Active</th>
+                      <th>Upload Active</th>
+                      <th>Grade</th>
+                      <th>Recommended SQM</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bb-history-tbody">
+                    <tr><td colspan="7" class="text-center text-slate">No bufferbloat tests on record yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+
+        <!-- Subtab 3: Route Vision Traceroute -->
+        <div id="speed-tab-routevision" class="subtab-content">
+          
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">🛰️</span>
+                <span class="header-text">INTERNET ROUTE VISION // ASYNCHRONOUS HOPS &amp; BGP MONITOR</span>
+              </div>
+              <div class="header-actions">
+                <button id="rv-trace-btn" class="action-pill-btn bg-cyan" style="color: #0B0F19; font-weight: 700;">🔍 Trace Route</button>
+                <button id="rv-cancel-btn" class="action-pill-btn bg-rose hidden" style="color: #fff; font-weight: 700;">✕ Cancel</button>
+              </div>
+            </div>
+
+            <p class="section-desc">
+              Traces transit hops asynchronously using Windows TCP/IP diagnostics. Employs forward-hop heuristic analysis to distinguish intermediate ICMP rate-limiting (Control Plane Policing) from genuine packet loss. Computes route fingerprints to alert on ISP routing changes.
+            </p>
+
+            <!-- Target Selector Bar -->
+            <div class="rv-target-bar" style="display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap;">
+              <span style="font-size: 12px; font-weight: 700; color: #94A3B8; text-transform: uppercase;">Target Destination:</span>
+              <div class="time-range-pills" id="rv-target-presets">
+                <button class="range-pill active" data-dest="cloudflare">Cloudflare (1.1.1.1)</button>
+                <button class="range-pill" data-dest="google">Google DNS (8.8.8.8)</button>
+                <button class="range-pill" data-dest="gateway">Gateway (192.168.29.1)</button>
+                <button class="range-pill" data-dest="valorant">Valorant Mumbai</button>
+                <button class="range-pill" data-dest="custom">Custom IP/Host</button>
+              </div>
+              <input type="text" id="rv-custom-input" placeholder="e.g. 1.0.0.1 or bbc.com" style="display: none; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 6px 12px; color: #fff; font-family: var(--font-mono); font-size: 13px;">
+            </div>
+
+            <!-- Route Health & Change Alert Banner -->
+            <div id="rv-alert-banner" class="panel-card" style="margin-bottom: 16px; border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.05);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 18px;" id="rv-status-icon">✅</span>
+                  <span style="font-size: 14px; font-weight: 600; color: #E2E8F0;" id="rv-status-text">Route is stable and matches baseline fingerprint.</span>
+                </div>
+                <span class="status-pill pill-cyan font-mono" id="rv-fingerprint-badge">FP: --</span>
+              </div>
+            </div>
+
+            <!-- Visual Interactive Hop Node Pipeline -->
+            <div class="panel-card" style="margin-bottom: 16px;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🌐</span>
+                  <span class="header-text">VISUAL TRANSIT PIPELINE (HOP-BY-HOP)</span>
+                </div>
+                <span style="font-size: 12px; color: #94A3B8;" id="rv-hop-count">0 Hops Resolved</span>
+              </div>
+              <div class="rv-pipeline-scroll" id="rv-pipeline-container" style="overflow-x: auto; padding: 16px 8px; display: flex; align-items: center; gap: 8px;">
+                <div style="color: #64748B; font-size: 13px; font-style: italic;">Initiate a trace to view the visual hop pipeline.</div>
+              </div>
+            </div>
+
+            <!-- Hop Diagnostic Table -->
+            <div class="panel-card" style="margin-bottom: 16px;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📊</span>
+                  <span class="header-text">DETAILED HOP TELEMETRY &amp; CLASSIFICATION</span>
+                </div>
+              </div>
+              <div class="guardian-table-container">
+                <table class="guardian-table">
+                  <thead>
+                    <tr>
+                      <th>Hop #</th>
+                      <th>IP / Hostname</th>
+                      <th>Average RTT</th>
+                      <th>Best RTT</th>
+                      <th>Packet Loss</th>
+                      <th>Classification</th>
+                      <th>Node Role</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rv-hops-tbody">
+                    <tr><td colspan="7" class="text-center text-slate">No active route trace data available.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Historical Route Diff Table -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📜</span>
+                  <span class="header-text">ROUTE TRACE AUDIT HISTORY &amp; CHANGE LOGS</span>
+                </div>
+              </div>
+              <div class="guardian-table-container">
+                <table class="guardian-table">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Destination</th>
+                      <th>Total Hops</th>
+                      <th>Min RTT</th>
+                      <th>Max RTT</th>
+                      <th>Fingerprint</th>
+                      <th>Routing Changes</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rv-history-tbody">
+                    <tr><td colspan="7" class="text-center text-slate">No historical traces found.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+
+        <!-- Subtab 4: Gaming Intelligence -->
+        <div id="speed-tab-gaming" class="subtab-content">
+          
+          <div class="gaming-layout">
+            
+            <!-- Left: Gaming Session Controller & Profiles -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🎮</span>
+                  <span class="header-text">ADAPTIVE GAMING SESSION RECORDER</span>
+                </div>
+                <span class="chip-live" id="game-status-chip">READY</span>
+              </div>
+
+              <div class="game-profiles-selector">
+                <span class="field-label">SELECT ACTIVE TITLE:</span>
+                <div class="game-pills-row" id="game-profiles-group">
+                  <button class="game-pill active" data-game="valorant">🎯 Valorant</button>
+                  <button class="game-pill" data-game="cs2">💣 Counter-Strike 2</button>
+                  <button class="game-pill" data-game="roblox">🕹️ Roblox</button>
+                  <button class="game-pill" data-game="custom">⚡ Competitive Esports</button>
+                </div>
+              </div>
+
+              <div class="session-actions-box">
+                <button id="start-game-session-btn" class="session-start-btn">
+                  <span>▶ START GAMING SESSION RECORDING</span>
+                </button>
+                <button id="end-game-session-btn" class="session-end-btn hidden">
+                  <span>⏹ STOP &amp; GENERATE SESSION REPORT</span>
+                </button>
+              </div>
+
+              <div class="game-session-hud hidden" id="game-active-hud">
+                <div class="active-hud-row">
+                  <span>Active Session: <strong class="text-emerald" id="live-session-name">Valorant</strong></span>
+                  <span>Duration: <strong class="text-cyan font-mono" id="live-session-dur">0m 00s</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Recent Gaming Sessions & Report Cards -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🏆</span>
+                  <span class="header-text">RECORDED GAMING SESSIONS &amp; JITTER (SQLITE)</span>
+                </div>
+              </div>
+
+              <div class="table-scroll-container">
+                <table class="luxury-table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Date / Time</th>
+                      <th>Avg Ping</th>
+                      <th>Max Ping</th>
+                      <th>Jitter</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="game-sessions-tbody">
+                    <tr><td colspan="6" class="text-center text-slate">No recorded sessions yet. Start one on the left!</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+      </section>
+
+      <section id="module-nova" class="view-panel">
+        
+          <!-- NOVA Sub-Navigation Tabs -->
+          <div class="time-range-pills" id="nova-subtabs" style="margin-bottom: 16px;">
+            <button class="range-pill active" data-tab="live">⬡ Live Autonomous Core</button>
+            <button class="range-pill" data-tab="daily">📋 Daily Health Report</button>
+            <button class="range-pill" data-tab="weekly">📊 7-Day Trend Report</button>
+            <button class="range-pill" data-tab="qa">💡 Everyday Network Q&amp;A</button>
+          </div>
+
+          <!-- TAB 1: LIVE AUTONOMOUS CORE -->
+          <div id="nova-view-live" class="nova-layout">
+            <!-- Left: Holographic Mascot & Activity Feed -->
+            <div class="panel-card nova-core-panel">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">⬡</span>
+                  <span class="header-text">NOVA AUTONOMOUS INTELLIGENCE CORE</span>
+                </div>
+                <span class="chip-online">ACTIVE ENGINE</span>
+              </div>
+
+              <div class="nova-avatar-stage">
+                <div class="nova-precision-core">
+                  <div class="nova-core-bezel">
+                    <div class="nova-core-face">
+                      <span class="nova-core-glyph">⬡</span>
+                    </div>
+                  </div>
+                  <div class="nova-core-subtext">TELEMETRY &amp; DIAGNOSTIC CORE</div>
+                </div>
+                <div class="nova-live-status" id="nova-core-status">ALL SYSTEMS OPTIMAL</div>
+              </div>
+
+              <div class="nova-rec-banner">
+                <span class="rec-title">LIVE RECOMMENDATION:</span>
+                <p id="nova-rec-detail" class="rec-body">Monitoring live adapter traffic. Telemetry demonstrates full line saturation on current 30 Mbps tier.</p>
+              </div>
+
+              <div class="nova-alerts-header">AUTONOMOUS ANOMALY &amp; ALERT LOG:</div>
+              <div class="nova-alerts-scroll" id="nova-alerts-list">
+                <!-- Dynamic alerts -->
+              </div>
+            </div>
+
+            <!-- Right: Interactive NOVA Conversational Console -->
+            <div class="panel-card nova-chat-panel">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">💬</span>
+                  <span class="header-text">INTERACTIVE NETWORK ASSISTANT</span>
+                </div>
+              </div>
+
+              <div class="nova-chat-history" id="nova-chat-history">
+                <div class="chat-bubble bubble-nova">
+                  <div class="bubble-sender">NOVA AI:</div>
+                  <div class="bubble-msg">Autonomous intelligence layer active. Continuously monitoring your active physical adapter and local gateway (192.168.29.1). Ask me why speed fluctuates, whether ping is elevated, or select any diagnostic action.</div>
+                </div>
+              </div>
+
+              <!-- NOVA 2.0 Quick Suggestion Chips -->
+              <div class="nova-suggestion-chips">
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Compare my last five speed tests')">📊 Last 5 Speed Tests</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Why is my internet slow?')">⚡ Why is it slow?</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('When is my recurring congestion?')">🕒 Recurring Congestion</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Where is the bottleneck in my internet?')">🔍 Bottleneck Isolation</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Is something wrong with my Wi-Fi?')">📶 Check Wi-Fi</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Who is on my Wi-Fi network?')">💻 Connected Devices</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Can I play Valorant with low ping?')">🎮 Gaming Latency</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Can I stream 4K video?')">🎬 4K Streaming</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('Check my bufferbloat loaded latency')">📦 Bufferbloat</button>
+                <button type="button" class="nova-suggestion-chip" onclick="askNovaQuestion('What is my overall network health?')">❤️ Network Health</button>
+              </div>
+
+              <div class="nova-chat-input-row">
+                <input type="text" id="nova-chat-input" placeholder="Ask NOVA about your network..." autocomplete="off">
+                <button id="nova-send-btn" class="chat-send-btn">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: DAILY HEALTH REPORT -->
+          <div id="nova-view-daily" class="panel-card" style="display: none;">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">📋</span>
+                <span class="header-text">NOVA DAILY NETWORK HEALTH &amp; PREDICTION REPORT</span>
+              </div>
+              <button id="nova-refresh-daily-btn" class="action-pill-btn">🔄 Refresh Report</button>
+            </div>
+            <div id="nova-daily-content">
+              <div class="text-center text-slate" style="padding: 24px;">Click to load daily report...</div>
+            </div>
+          </div>
+
+          <!-- TAB 3: 7-DAY TREND REPORT -->
+          <div id="nova-view-weekly" class="panel-card" style="display: none;">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">📊</span>
+                <span class="header-text">NOVA 7-DAY BEHAVIORAL TREND &amp; STABILITY SUMMARY</span>
+              </div>
+              <button id="nova-refresh-weekly-btn" class="action-pill-btn">🔄 Refresh Summary</button>
+            </div>
+            <div id="nova-weekly-content">
+              <div class="text-center text-slate" style="padding: 24px;">Click to load 7-day summary...</div>
+            </div>
+          </div>
+
+          <!-- TAB 4: EVERYDAY NETWORK Q&A -->
+          <div id="nova-view-qa" class="panel-card" style="display: none;">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">💡</span>
+                <span class="header-text">EVERYDAY NETWORK INTELLIGENCE &amp; TROUBLESHOOTING</span>
+              </div>
+            </div>
+            <p class="section-desc">Select an everyday networking problem or ask NOVA a custom diagnostic question:</p>
+            <div class="qa-quick-chips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;" id="nova-qa-chips">
+              <button class="range-pill" data-q="Why is my ping high?">🎮 Why is my ping high?</button>
+              <button class="range-pill" data-q="Is my ISP throttling me?">📉 Is my ISP throttling me?</button>
+              <button class="range-pill" data-q="Can someone else be using my Wi-Fi?">👥 Anyone using my Wi-Fi?</button>
+              <button class="range-pill" data-q="Is my speed enough for 4K streaming?">📺 Is my speed enough for 4K?</button>
+              <button class="range-pill" data-q="Should I reboot my router?">🔄 Should I reboot my router?</button>
+              <button class="range-pill" data-q="Is my Wi-Fi or router causing the issue?">📡 Wi-Fi vs Router problem?</button>
+              <button class="range-pill" data-q="When is the best time to download large files?">⏳ Best time to download?</button>
+              <button class="range-pill" data-q="Why does video call stutter during downloads?">📹 Why does Zoom stutter?</button>
+            </div>
+            <div class="nova-chat-input-row" style="margin-bottom: 16px;">
+              <input type="text" id="nova-qa-input" placeholder="Type an everyday network question (e.g. 'Is my ping normal?')..." autocomplete="off">
+              <button id="nova-qa-submit-btn" class="chat-send-btn">Ask</button>
+            </div>
+            <div id="nova-qa-answer-box" class="panel-card" style="border-color: rgba(37, 139, 255, 0.3); background: rgba(37, 139, 255, 0.05); display: none;">
+              <div style="font-size: 15px; font-weight: 700; color: #00D9FF; margin-bottom: 8px;" id="nova-qa-answer-title">DIAGNOSTIC RESOLUTION</div>
+              <div style="font-size: 14px; color: #E2E8F0; line-height: 1.6;" id="nova-qa-answer-body"></div>
+              <div style="margin-top: 12px; font-size: 12px; color: #94A3B8; font-style: italic;" id="nova-qa-answer-fact"></div>
+            </div>
+          </div>
+        
+        <!-- Autonomous Policy & QoS Recommendations (Integrated from Autopilot) -->
+        <div style="margin-top: 20px;">
+          
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">🧭</span>
+                <span class="header-text">NETWORK AUTOPILOT // AUTONOMOUS MANAGEMENT &amp; GOVERNANCE</span>
+              </div>
+              <div class="header-actions">
+                <span class="status-pill pill-cyan font-mono" id="ap-active-mode-badge">MODE: OBSERVE</span>
+              </div>
+            </div>
+
+            <p class="section-desc">
+              Autonomous self-driving network agent for Windows 11. Implements strict state-machine governance, an immutable SQLite audit trail, low-risk reversible actions, and automated rollback protections.
+            </p>
+
+            <!-- 4-Mode Interactive Selector Cards -->
+            <div class="ap-modes-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
+              <div class="ap-mode-card active" data-mode="OBSERVE" id="ap-mode-observe">
+                <div style="font-size: 22px; margin-bottom: 6px;">👁️</div>
+                <div style="font-weight: 700; font-size: 14px; color: #fff;">OBSERVE</div>
+                <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Passive monitoring, continuous forensic logging, zero state changes.</div>
+              </div>
+
+              <div class="ap-mode-card" data-mode="ASSIST" id="ap-mode-assist">
+                <div style="font-size: 22px; margin-bottom: 6px;">🤝</div>
+                <div style="font-weight: 700; font-size: 14px; color: #fff;">ASSIST</div>
+                <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Identifies bottlenecks and requests your one-click approval before acting.</div>
+              </div>
+
+              <div class="ap-mode-card" data-mode="AUTOPILOT" id="ap-mode-autopilot">
+                <div style="font-size: 22px; margin-bottom: 6px;">⚡</div>
+                <div style="font-weight: 700; font-size: 14px; color: #fff;">AUTOPILOT</div>
+                <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Applies safe allowlist optimizations automatically with instant 1-click rollback.</div>
+              </div>
+
+              <div class="ap-mode-card" data-mode="MANUAL" id="ap-mode-manual">
+                <div style="font-size: 22px; margin-bottom: 6px;">🛠️</div>
+                <div style="font-weight: 700; font-size: 14px; color: #fff;">MANUAL</div>
+                <div style="font-size: 11px; color: #94A3B8; margin-top: 4px;">Full user-directed manual control without autonomous interventions.</div>
+              </div>
+            </div>
+
+            <!-- Pending Action Approvals (Visible in ASSIST mode) -->
+            <div id="ap-pending-container" class="panel-card" style="margin-bottom: 16px; border-color: rgba(245, 158, 11, 0.4); display: none;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">⏳</span>
+                  <span class="header-text">PENDING OPTIMIZATION PROPOSALS (AWAITING YOUR APPROVAL)</span>
+                </div>
+                <span class="status-pill pill-amber" id="ap-pending-count-badge">0 Pending</span>
+              </div>
+              <div id="ap-pending-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+                <!-- Dynamic pending approval cards -->
+              </div>
+            </div>
+
+            <!-- Active Rules & Safety Allowlist Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div class="panel-card">
+                <div class="panel-header">
+                  <div class="header-title-box">
+                    <span class="header-icon">🛡️</span>
+                    <span class="header-text">ACTIVE SAFETY RULES</span>
+                  </div>
+                </div>
+                <div id="ap-rules-list" style="display: flex; flex-direction: column; gap: 10px;">
+                  <!-- Dynamic safety rules -->
+                </div>
+              </div>
+
+              <div class="panel-card">
+                <div class="panel-header">
+                  <div class="header-title-box">
+                    <span class="header-icon">⚡</span>
+                    <span class="header-text">MANUAL OVERDRIVE ACTIONS</span>
+                  </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <button id="ap-btn-flush-dns" class="action-pill-btn" style="text-align: left; padding: 12px; width: 100%; border-radius: 8px;">
+                    <div style="font-weight: 700; color: #00D9FF;">🧹 Flush Windows DNS Cache</div>
+                    <div style="font-size: 11px; color: #94A3B8;">Purges corrupted resolver entries via Clear-DnsClientCache</div>
+                  </button>
+                  <button id="ap-btn-recalc-dna" class="action-pill-btn" style="text-align: left; padding: 12px; width: 100%; border-radius: 8px;">
+                    <div style="font-weight: 700; color: #8B5CF6;">🧬 Force DNA Variance Recalculation</div>
+                    <div style="font-size: 11px; color: #94A3B8;">Recomputes mean and standard deviation across all SQLite telemetry</div>
+                  </button>
+                  <button id="ap-btn-capture-blackbox" class="action-pill-btn" style="text-align: left; padding: 12px; width: 100%; border-radius: 8px;">
+                    <div style="font-weight: 700; color: #10B981;">📦 Snapshot Diagnostic Incident</div>
+                    <div style="font-size: 11px; color: #94A3B8;">Stores complete system network state into Internet Black Box</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Immutable SQLite Audit Trail Table -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📜</span>
+                  <span class="header-text">IMMUTABLE AUTOPILOT AUDIT TRAIL (SQLITE)</span>
+                </div>
+                <button id="ap-refresh-audit-btn" class="action-pill-btn">🔄 Refresh Log</button>
+              </div>
+              <div class="guardian-table-container">
+                <table class="guardian-table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Mode</th>
+                      <th>Action Key</th>
+                      <th>Trigger Reason</th>
+                      <th>Status</th>
+                      <th>Rollback Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ap-audit-tbody">
+                    <tr><td colspan="6" class="text-center text-slate">Loading audit trail...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+      </section>
+
+      <section id="module-explorer" class="view-panel">
+
+        <!-- Pillar 4 Subtabs: Local Environment & Devices -->
+        <div class="pillar-subtabs" id="explorer-subtabs">
+          <button class="subtab-btn active" data-subtab="explorer-tab-radar">📡 Device Radar</button>
+          <button class="subtab-btn" data-subtab="explorer-tab-wifi">📶 Wi-Fi Lab</button>
+          <button class="subtab-btn" data-subtab="explorer-tab-processes">🛡️ Process Monitor</button>
+        </div>
+
+        <!-- Subtab 1: Device Radar (Local Subnet Discovery) -->
+        <div id="explorer-tab-radar" class="subtab-content active">
+          
+          <div class="digitaltwin-layout">
+            
+            <!-- Left: Node-Link Interactive Topology Canvas -->
+            <div class="panel-card twin-canvas-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🌐</span>
+                  <span class="header-text">360° NETWORK DIGITAL TWIN TOPOLOGY</span>
+                </div>
+                <button id="rescan-twin-btn" class="mini-btn">🔄 Rescan LAN</button>
+              </div>
+
+              <div class="twin-canvas-wrapper">
+                <canvas id="twinCanvas" width="460" height="380"></canvas>
+              </div>
+
+              <div class="twin-canvas-caption">
+                Central Node: <strong>JioFiber Home Gateway</strong> • Satellite Nodes: <strong>Discovered Stations</strong>
+              </div>
+            </div>
+
+            <!-- Right: Connected Stations Management Table -->
+            <div class="panel-card twin-list-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">👥</span>
+                  <span class="header-text">CONNECTED DEVICES (<span id="twin-count">3</span> STATIONS)</span>
+                </div>
+              </div>
+
+              <div class="devices-list-scroll" id="twin-devices-list">
+                <!-- Populated via digital-twin module -->
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+
+        <!-- Subtab 2: Wi-Fi Intelligence Lab -->
+        <div id="explorer-tab-wifi" class="subtab-content">
+          
+          <div class="wifi-lab-layout">
+            
+            <!-- Left: Spectrum Overlap & Channel Distribution -->
+            <div class="panel-card wifi-spectrum-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📡</span>
+                  <span class="header-text">2.4 GHz SPECTRUM OVERLAP &amp; INTERFERENCE</span>
+                </div>
+                <span class="chip-live">NETSH SCAN</span>
+              </div>
+
+              <div class="spectrum-visualizer" id="spectrum-bars">
+                <!-- Dynamic 2.4 GHz channel bars (1, 6, 9, 11) -->
+              </div>
+
+              <div class="wifi-spectrum-summary">
+                <div class="spec-pod">
+                  <span class="sp-label">ACTIVE CHANNEL</span>
+                  <div class="sp-val text-cyan" id="wf-active-ch">Channel 6</div>
+                </div>
+                <div class="spec-pod">
+                  <span class="sp-label">RF SIGNAL QUALITY</span>
+                  <div class="sp-val text-emerald" id="wf-signal-rssi">100% (-36 dBm)</div>
+                </div>
+                <div class="spec-pod">
+                  <span class="sp-label">INTERFERENCE SCORE</span>
+                  <div class="sp-val text-violet" id="wf-score">88 / 100 (Clean)</div>
+                </div>
+                <div class="spec-pod">
+                  <span class="sp-label">RECOMMENDED CHANNEL</span>
+                  <div class="sp-val text-emerald" id="wf-rec-ch">Channel 11</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Nearby Access Points Table -->
+            <div class="panel-card wifi-nearby-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📶</span>
+                  <span class="header-text">NEARBY ACCESS POINTS &amp; BSSIDS</span>
+                </div>
+              </div>
+
+              <div class="table-scroll-container">
+                <table class="luxury-table">
+                  <thead>
+                    <tr>
+                      <th>SSID</th>
+                      <th>BSSID</th>
+                      <th>Channel</th>
+                      <th>Signal</th>
+                      <th>Band</th>
+                      <th>Radio</th>
+                    </tr>
+                  </thead>
+                  <tbody id="wf-nearby-tbody">
+                    <tr><td colspan="6" class="text-center text-slate">Scanning nearby wireless access points...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+
+        <!-- Subtab 3: Process Bandwidth Monitor -->
+        <div id="explorer-tab-processes" class="subtab-content">
+          
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">🛡️</span>
+                <span class="header-text">SMART BANDWIDTH GUARDIAN (PER-PROCESS ATTRIBUTION)</span>
+              </div>
+              <div class="header-action-group">
+                <button id="freeze-bandwidth-btn" class="freeze-toggle-btn">
+                  <span>🧊 Bandwidth Freeze: <strong id="freeze-state-label">OFF</strong></span>
+                </button>
+                <button id="refresh-procs-btn" class="mini-btn">🔄 Refresh</button>
+              </div>
+            </div>
+
+            <p class="section-desc">
+              Inspects Windows TCP socket tables mapped to active processes. Displays real-time estimated bandwidth share based on active socket allocation.
+            </p>
+
+            <div class="table-scroll-container">
+              <table class="luxury-table">
+                <thead>
+                  <tr>
+                    <th>Process</th>
+                    <th>PID</th>
+                    <th>Category</th>
+                    <th>Active Sockets</th>
+                    <th>Est. Download</th>
+                    <th>Est. Upload</th>
+                    <th>State</th>
+                  </tr>
+                </thead>
+                <tbody id="guardian-procs-tbody">
+                  <tr><td colspan="7" class="text-center text-slate">Scanning process socket tables...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        
+        </div>
+      </section>
+
+      <section id="module-settings" class="view-panel">
+
+        <!-- Pillar 5 Subtabs: History, Incidents & Settings -->
+        <div class="pillar-subtabs" id="settings-subtabs">
+          <button class="subtab-btn active" data-subtab="settings-tab-vault">⚙️ Settings &amp; Vault</button>
+          <button class="subtab-btn" data-subtab="settings-tab-history">⏳ Historical Intelligence</button>
+          <button class="subtab-btn" data-subtab="settings-tab-blackbox">📦 Black Box Outages</button>
+        </div>
+
+        <!-- Subtab 1: Settings & SQLite Vault -->
+        <div id="settings-tab-vault" class="subtab-content active">
+          
+          <div class="settings-full-grid">
+            
+            <!-- Section 1: Appearance & UI Customization -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🎨</span>
+                  <span class="header-text">APPEARANCE &amp; THEME ENGINE</span>
+                </div>
+              </div>
+              <div class="settings-form">
+                <div class="setting-item">
+                  <label class="setting-label">Interface Theme Mode</label>
+                  <select id="settings-theme-select" class="luxury-select setting-input">
+                    <option value="dark">🌑 Dark (Obsidian Cyber Glass)</option>
+                    <option value="light">☀️ Light (Executive Pure Glass)</option>
+                    <option value="system">🖥️ System Default (Follows Windows)</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">Speedometer Accent Glow</label>
+                  <select id="settings-glow-select" class="luxury-select setting-input">
+                    <option value="cyan">Electric Cyan (Default)</option>
+                    <option value="blue">Deep Cobalt Blue</option>
+                    <option value="violet">Royal Violet</option>
+                    <option value="emerald">Emerald Pulse</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">UI Density</label>
+                  <select id="settings-density-select" class="luxury-select setting-input">
+                    <option value="comfortable">Comfortable (1080p / 1440p)</option>
+                    <option value="compact">Compact (Laptop / 1366x768)</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">Animation Speed</label>
+                  <select id="settings-anim-select" class="luxury-select setting-input">
+                    <option value="normal">Smooth Fluid (Default)</option>
+                    <option value="snappy">Snappy Fast (120Hz/144Hz)</option>
+                    <option value="minimal">Minimal / Eco Power</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: General & Windows Desktop Integration -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🪟</span>
+                  <span class="header-text">WINDOWS DESKTOP INTEGRATION</span>
+                </div>
+              </div>
+              <div class="settings-form">
+                <div class="setting-item-checkbox">
+                  <input type="checkbox" id="cfg-start-windows" class="luxury-checkbox">
+                  <label for="cfg-start-windows"><strong>Start with Windows 11</strong> (Launch minimized to system tray)</label>
+                </div>
+                <div class="setting-item-checkbox">
+                  <input type="checkbox" id="cfg-min-tray" class="luxury-checkbox" checked>
+                  <label for="cfg-min-tray"><strong>Minimize to System Tray</strong> (Keep monitoring active)</label>
+                </div>
+                <div class="setting-item-checkbox">
+                  <input type="checkbox" id="cfg-close-tray" class="luxury-checkbox" checked>
+                  <label for="cfg-close-tray"><strong>Close Window to Tray</strong> (Background telemetry daemon)</label>
+                </div>
+                <div class="setting-item-checkbox">
+                  <input type="checkbox" id="cfg-single-instance" class="luxury-checkbox" checked>
+                  <label for="cfg-single-instance"><strong>Enforce Single Instance</strong> (Focus existing window)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Autonomous Notifications & Alerts -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🔔</span>
+                  <span class="header-text">NOTIFICATIONS &amp; INTELLIGENT ALERTS</span>
+                </div>
+              </div>
+              <div class="settings-form">
+                <div class="setting-item">
+                  <label class="setting-label">Throughput Drop Alert (Below Mbps)</label>
+                  <input type="number" id="cfg-speed-alert" class="luxury-input setting-input" value="15" min="1" max="500">
+                </div>
+                <div class="setting-item-checkbox">
+                  <input type="checkbox" id="cfg-outage-alerts" class="luxury-checkbox" checked>
+                  <label for="cfg-outage-alerts"><strong>Black Box Outage Notifications</strong> (Instant balloon warnings)</label>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">Packet Loss Warning Threshold (%)</label>
+                  <input type="number" id="cfg-packet-loss-alert" class="luxury-input setting-input" value="5" min="1" max="50">
+                </div>
+                <div class="setting-item-checkbox">
+                  <input type="checkbox" id="cfg-quiet-hours" class="luxury-checkbox">
+                  <label for="cfg-quiet-hours"><strong>Quiet Hours</strong> (Suppress sound chimes between 11 PM - 7 AM)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Network Monitoring & Sampling -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📡</span>
+                  <span class="header-text">NETWORK MONITORING &amp; DNA ENGINE</span>
+                </div>
+              </div>
+              <div class="settings-form">
+                <div class="setting-item">
+                  <label class="setting-label">Physical Adapter Binding</label>
+                  <select id="cfg-adapter-select" class="luxury-select setting-input">
+                    <option value="auto">Auto-Detect Active (Wi-Fi 802.11n)</option>
+                    <option value="wifi">Force Wireless LAN</option>
+                    <option value="ethernet">Force Ethernet (LAN)</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">Telemetry Sampling Interval</label>
+                  <select id="cfg-sampling-select" class="luxury-select setting-input">
+                    <option value="1">1.0 Second (Real-Time Precision)</option>
+                    <option value="2">2.0 Seconds (Balanced)</option>
+                    <option value="5">5.0 Seconds (Low Power)</option>
+                  </select>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">Black Box Incident Retention</label>
+                  <select id="cfg-retention-select" class="luxury-select setting-input">
+                    <option value="7">7 Days</option>
+                    <option value="30" selected>30 Days (Recommended)</option>
+                    <option value="90">90 Days</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Data Vault, SQLite Management & Tixati Boost -->
+            <div class="panel-card" style="grid-column: 1 / -1;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">💾</span>
+                  <span class="header-text">SQLITE DATA VAULT &amp; SYSTEM ENGINE</span>
+                </div>
+              </div>
+              <div class="vault-overview-grid">
+                <div class="vault-stat-box">
+                  <span class="v-label">DATABASE SIZE</span>
+                  <strong class="v-val text-cyan" id="vault-db-size">-- MB</strong>
+                </div>
+                <div class="vault-stat-box">
+                  <span class="v-label">SPEED TEST RECORDS</span>
+                  <strong class="v-val text-emerald" id="vault-tests-count">--</strong>
+                </div>
+                <div class="vault-stat-box">
+                  <span class="v-label">TELEMETRY SAMPLES</span>
+                  <strong class="v-val text-violet" id="vault-telemetry-count">--</strong>
+                </div>
+                <div class="vault-stat-box">
+                  <span class="v-label">RECORDED INCIDENTS</span>
+                  <strong class="v-val text-amber" id="vault-incidents-count">--</strong>
+                </div>
+              </div>
+
+              <div class="settings-actions-bar">
+                <button id="save-settings-btn" class="retest-btn">💾 Save All Preferences</button>
+                <button id="purge-telemetry-btn" class="action-pill-btn" style="border-color: var(--amber); color: var(--amber);">🧹 Purge Telemetry (&gt;7 Days)</button>
+                <button id="clear-all-tests-btn" class="action-pill-btn" style="border-color: var(--rose); color: var(--rose);">🗑️ Clear Speed Tests</button>
+                <button id="st-copy-trackers-btn" class="action-pill-btn">📋 Copy 52 Turbo Trackers</button>
+              </div>
+            </div>
+
+            <!-- Section 6: Verified Database Backup, Restore & Data Export -->
+            <div class="panel-card" style="grid-column: 1 / -1;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🛡️</span>
+                  <span class="header-text">DATABASE BACKUP, SAFE RESTORE &amp; DATA EXPORT</span>
+                </div>
+                <div class="header-actions">
+                  <button id="btn-create-backup" class="retest-btn" style="padding: 5px 12px; font-size: 11px;">💾 Create Verified Backup</button>
+                  <button id="btn-refresh-backups" class="action-pill-btn" style="padding: 5px 12px; font-size: 11px;">🔄 Refresh</button>
+                </div>
+              </div>
+              <div class="settings-form">
+                <div class="export-hub-row" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+                  <button id="btn-export-speed-csv" class="action-pill-btn">📊 Export Speed Tests (CSV)</button>
+                  <button id="btn-export-incidents-csv" class="action-pill-btn">⚠️ Export Incidents (CSV)</button>
+                  <button id="btn-export-telemetry-json" class="action-pill-btn">📦 Export Telemetry (JSON)</button>
+                  <button id="btn-run-summary-btn" class="action-pill-btn" style="border-color: var(--cyan); color: var(--cyan);">📋 Refresh Daily Report</button>
+                </div>
+                <div class="backups-table-box" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--text-slate); margin-bottom: 8px; letter-spacing: 0.05em;">AVAILABLE VERIFIED BACKUPS (ROLLING 7-DAY RETENTION)</div>
+                  <div id="backups-list-container" style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="font-size: 11px; color: var(--text-muted); font-style: italic;">Loading backup catalog...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 7: Daily Network Executive Summary & System Health -->
+            <div class="panel-card" style="grid-column: 1 / -1;">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">📈</span>
+                  <span class="header-text">DAILY NETWORK EXECUTIVE SUMMARY &amp; SYSTEM HEALTH</span>
+                </div>
+              </div>
+              <div class="settings-form">
+                <div id="daily-summary-card" style="background: rgba(14,22,38,0.6); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 12px; font-weight: 700; color: var(--cyan);" id="summary-date-heading">TODAY'S EXECUTIVE NETWORK REPORT</span>
+                    <span class="chip-online" id="summary-score-badge" style="font-size: 11px;">HEALTH SCORE: --/100</span>
+                  </div>
+                  <p id="daily-summary-text" style="font-size: 12px; line-height: 1.6; color: var(--text-pure); margin-bottom: 12px;">Loading daily summary telemetry...</p>
+                  <div class="vault-overview-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                    <div class="vault-stat-box"><span class="v-label">UPTIME</span><strong class="v-val text-emerald" id="sum-uptime">--%</strong></div>
+                    <div class="vault-stat-box"><span class="v-label">AVG DOWNLOAD</span><strong class="v-val text-cyan" id="sum-avg-down">-- Mbps</strong></div>
+                    <div class="vault-stat-box"><span class="v-label">AVG UPLOAD</span><strong class="v-val text-violet" id="sum-avg-up">-- Mbps</strong></div>
+                    <div class="vault-stat-box"><span class="v-label">AVG LATENCY</span><strong class="v-val text-amber" id="sum-avg-ping">-- ms</strong></div>
+                  </div>
+                </div>
+
+                <div class="status-details-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                  <div class="status-item"><span class="s-label">Application Version</span><strong class="s-val text-cyan" id="app-version-val">v8.1.0-PRO (Build 20261119.1)</strong></div>
+                  <div class="status-item"><span class="s-label">Self-Healing Manager</span><strong class="s-val text-emerald" id="health-manager-val">ACTIVE (Monitoring 4 Services)</strong></div>
+                  <div class="status-item"><span class="s-label">Process Memory (RSS)</span><strong class="s-val text-violet" id="app-mem-val">-- MB</strong></div>
+                  <div class="status-item"><span class="s-label">SQLite Status</span><strong class="s-val text-emerald font-mono" id="sqlite-health-val">WAL / QUICK_CHECK OK</strong></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        
+        </div>
+
+        <!-- Subtab 2: Historical Intelligence (Time Machine + Network DNA) -->
+        <div id="settings-tab-history" class="subtab-content">
+          
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">⏳</span>
+                <span class="header-text">NETWORK TIME MACHINE // HISTORICAL TELEMETRY &amp; DVR REPLAY</span>
+              </div>
+              <div class="time-range-pills" id="tm-range-group">
+                <button class="range-pill active" data-hours="1">1 Hour</button>
+                <button class="range-pill" data-hours="6">6 Hours</button>
+                <button class="range-pill" data-hours="12">12 Hours</button>
+                <button class="range-pill" data-hours="24">24 Hours</button>
+                <button class="range-pill" data-hours="168">7 Days</button>
+              </div>
+            </div>
+
+            <p class="section-desc">
+              Continuous retrospective telemetry replay straight from SQLite. Scrub or play backwards through historical bandwidth, latency, jitter, and Wi-Fi signal metrics with zero fabricated data points.
+            </p>
+
+            <!-- Metric Filter and DVR Controls Toolbar -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; padding: 10px 14px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <!-- Metric Selector -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 11px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px;">Metric:</span>
+                <div class="time-range-pills" id="tm-metric-group">
+                  <button class="range-pill active" data-metric="throughput">⚡ Throughput</button>
+                  <button class="range-pill" data-metric="latency">⏱️ Latency &amp; Jitter</button>
+                  <button class="range-pill" data-metric="wifi">📶 Wi-Fi &amp; Link</button>
+                  <button class="range-pill" data-metric="loss">🛡️ Loss &amp; Health</button>
+                </div>
+              </div>
+
+              <!-- DVR Playback Controls -->
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <button id="tm-play-btn" class="action-pill-btn" style="background: rgba(0, 217, 255, 0.15); border: 1px solid rgba(0, 217, 255, 0.4); color: #00D9FF; font-weight: 700; padding: 5px 14px; cursor: pointer; border-radius: 6px;">▶ Play DVR</button>
+                <span style="font-size: 11px; font-weight: 700; color: #94A3B8;">Speed:</span>
+                <div class="time-range-pills" id="tm-speed-group">
+                  <button class="range-pill active" data-speed="1">1x</button>
+                  <button class="range-pill" data-speed="2">2x</button>
+                  <button class="range-pill" data-speed="5">5x</button>
+                  <button class="range-pill" data-speed="10">10x</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chart Canvas -->
+            <div class="tm-chart-wrapper" style="position: relative;">
+              <canvas id="tmCanvas" width="900" height="230"></canvas>
+              <div id="tm-empty-overlay" style="display: none; position: absolute; inset: 0; background: rgba(11, 15, 25, 0.88); backdrop-filter: blur(4px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; border-radius: 8px;">
+                <span style="font-size: 28px; margin-bottom: 8px;">📊</span>
+                <div style="font-weight: 700; font-size: 15px; color: #F1F5F9; margin-bottom: 6px;" id="tm-empty-title">No Telemetry Recorded In This Window</div>
+                <div style="font-size: 13px; color: #94A3B8; max-width: 600px; line-height: 1.5;" id="tm-empty-desc">Telemetry collection is actively accumulating records in SQLite. Select an active time range (e.g. 1 Hour) to view live recorded points.</div>
+              </div>
+            </div>
+
+            <!-- Ghost Replay Scrubber Controls -->
+            <div class="tm-scrubber-box" style="margin-top: 14px;">
+              <div class="scrubber-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="scrubber-label">Historical Timestamp Replay:</span>
+                <span class="font-mono text-cyan font-bold" id="tm-scrub-time">Live</span>
+              </div>
+              <input type="range" id="tm-scrub-slider" min="0" max="60" value="60" class="luxury-range" style="width: 100%; margin: 8px 0;">
+              <div class="scrubber-stats-row" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px;">
+                <span>Download: <strong class="text-cyan font-mono" id="tm-replay-down">-- Mbps</strong></span>
+                <span>Upload: <strong class="text-violet font-mono" id="tm-replay-up">-- Mbps</strong></span>
+                <span>Gateway Ping: <strong class="text-emerald font-mono" id="tm-replay-ping">-- ms</strong></span>
+                <span>Jitter: <strong class="text-amber font-mono" id="tm-replay-jitter">-- ms</strong></span>
+                <span>Wi-Fi Signal: <strong class="text-cyan font-mono" id="tm-replay-signal">--%</strong></span>
+                <span>Adapter: <strong class="text-slate font-mono" id="tm-replay-adapter">--</strong></span>
+              </div>
+            </div>
+
+            <!-- Correlated Incidents Strip -->
+            <div id="tm-incidents-card" style="margin-top: 14px; padding: 12px 16px; background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 0.5px; text-transform: uppercase;">Correlated Network Incidents In This Window:</span>
+                <span class="font-mono text-cyan" style="font-size: 12px;" id="tm-incident-count">0 Incidents Detected</span>
+              </div>
+              <div id="tm-incident-list" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 12px; color: #64748B;">No performance degradations or link drops recorded during this window. Nominal operation verified.</span>
+              </div>
+            </div>
+          </div>
+        
+          <div style="margin-top: 20px;">
+            
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">🧬</span>
+                <span class="header-text">NETWORK DNA // STATISTICAL BEHAVIORAL FINGERPRINT</span>
+              </div>
+              <div class="header-actions">
+                <button id="dna-recalc-btn" class="action-pill-btn">🔄 Recalculate Baselines</button>
+              </div>
+            </div>
+
+            <p class="section-desc">
+              Continuous mathematical profile of normal throughput, latency, and stability built strictly from genuine SQLite historical records. Zero hardcoded assumptions.
+            </p>
+
+            <!-- Top DNA Status Metrics Row -->
+            <div class="overview-dual-meters">
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">STATISTICAL ENGINE STATUS</span>
+                  <span class="meter-sub" id="dna-engine-sub">GENUINE TELEMETRY</span>
+                </div>
+                <div class="meter-main-val text-emerald" id="dna-status-val">LEARNING</div>
+                <div class="meter-note text-slate" id="dna-samples-sub">Recording real telemetry snapshots to establish baseline.</div>
+              </div>
+
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">CURRENT HOUR BASELINE</span>
+                  <span class="meter-sub font-mono" id="dna-hour-slot">Hour --:00</span>
+                </div>
+                <div class="meter-main-val text-cyan" id="dna-baseline-val">-- Mbps</div>
+                <div class="meter-note text-slate" id="dna-baseline-sub">Historical mean ± std dev for active hour</div>
+              </div>
+
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">LIVE VARIANCE / ANOMALY</span>
+                  <span class="meter-sub" id="dna-zscore-badge">Z-SCORE: 0.0</span>
+                </div>
+                <div class="meter-main-val text-violet" id="dna-dev-val">0.0%</div>
+                <div class="meter-note text-slate" id="dna-dev-sub">Relative deviation from baseline</div>
+              </div>
+            </div>
+
+            <!-- Plain-English Anomaly Explanation Card -->
+            <div class="panel-card" style="margin-top: 16px; border-color: rgba(37, 139, 255, 0.25);">
+              <div class="panel-header">
+                <div class="header-title-box">
+                  <span class="header-icon">🧠</span>
+                  <span class="header-text">NOVA DNA ANOMALY &amp; BEHAVIORAL EXPLANATION</span>
+                </div>
+                <span class="status-pill pill-emerald" id="dna-anomaly-pill">NOMINAL</span>
+              </div>
+              <p class="rec-body font-sans" id="dna-explanation-text" style="font-size: 14px; line-height: 1.6; color: #E2E8F0;">
+                Initializing Network DNA evaluation loop...
+              </p>
+            </div>
+
+            <!-- Comprehensive Statistical Breakdown Card (IQR, Median, Variance, Percentiles) -->
+            <div class="panel-card" style="margin-top: 16px; background: rgba(15, 23, 42, 0.5);">
+              <div class="panel-header" style="margin-bottom: 12px;">
+                <div class="header-title-box">
+                  <span class="header-icon">📐</span>
+                  <span class="header-text">ACTIVE HOUR MATHEMATICAL PROFILE (RIGOROUS STATISTICAL DECOMPOSITION)</span>
+                </div>
+                <span class="font-mono text-cyan" style="font-size: 12px;" id="dna-stat-slot-label">Slot: --:00</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;">
+                <div class="meter-card" style="padding: 10px 12px;">
+                  <div style="font-size: 11px; color: #94A3B8; font-weight: 700;">MEDIAN (p50)</div>
+                  <div class="font-mono text-cyan font-bold" style="font-size: 16px; margin-top: 4px;" id="dna-stat-median">--</div>
+                </div>
+                <div class="meter-card" style="padding: 10px 12px;">
+                  <div style="font-size: 11px; color: #94A3B8; font-weight: 700;">STD DEV (σ)</div>
+                  <div class="font-mono text-violet font-bold" style="font-size: 16px; margin-top: 4px;" id="dna-stat-stddev">--</div>
+                </div>
+                <div class="meter-card" style="padding: 10px 12px;">
+                  <div style="font-size: 11px; color: #94A3B8; font-weight: 700;">VARIANCE (s²)</div>
+                  <div class="font-mono text-slate font-bold" style="font-size: 16px; margin-top: 4px;" id="dna-stat-var">--</div>
+                </div>
+                <div class="meter-card" style="padding: 10px 12px;">
+                  <div style="font-size: 11px; color: #94A3B8; font-weight: 700;">IQR (p75 - p25)</div>
+                  <div class="font-mono text-amber font-bold" style="font-size: 16px; margin-top: 4px;" id="dna-stat-iqr">--</div>
+                </div>
+                <div class="meter-card" style="padding: 10px 12px;">
+                  <div style="font-size: 11px; color: #94A3B8; font-weight: 700;">PERCENTILE p90</div>
+                  <div class="font-mono text-emerald font-bold" style="font-size: 16px; margin-top: 4px;" id="dna-stat-p90">--</div>
+                </div>
+                <div class="meter-card" style="padding: 10px 12px;">
+                  <div style="font-size: 11px; color: #94A3B8; font-weight: 700;">PERCENTILE p99</div>
+                  <div class="font-mono text-cyan font-bold" style="font-size: 16px; margin-top: 4px;" id="dna-stat-p99">--</div>
+                </div>
+              </div>
+              <div style="margin-top: 12px; font-size: 12px; color: #94A3B8; display: flex; flex-wrap: wrap; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;">
+                <span>Sample Counts: Down: <strong class="text-cyan font-mono" id="dna-cnt-down">0</strong> | Up: <strong class="text-violet font-mono" id="dna-cnt-up">0</strong> | Ping: <strong class="text-emerald font-mono" id="dna-cnt-ping">0</strong> | Signal: <strong class="text-amber font-mono" id="dna-cnt-signal">0</strong></span>
+                <span>Tukey Outlier Bounds: [<strong class="font-mono" id="dna-fence-low">--</strong>, <strong class="font-mono" id="dna-fence-high">--</strong>]</span>
+              </div>
+            </div>
+
+            <!-- 24-Hour DNA Performance Fingerprint Curve -->
+            <div class="panel-card" style="margin-top: 16px;">
+              <div class="panel-header" style="flex-wrap: wrap; gap: 10px;">
+                <div class="header-title-box">
+                  <span class="header-icon">📊</span>
+                  <span class="header-text">24-HOUR STATISTICAL PERFORMANCE CURVE (HISTORICAL NORM)</span>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                  <!-- Metric Toggle -->
+                  <div class="time-range-pills" id="dna-metric-group">
+                    <button class="range-pill active" data-metric="download">Down Mbps</button>
+                    <button class="range-pill" data-metric="upload">Up Mbps</button>
+                    <button class="range-pill" data-metric="ping">Latency ms</button>
+                    <button class="range-pill" data-metric="jitter">Jitter ms</button>
+                    <button class="range-pill" data-metric="signal">Wi-Fi %</button>
+                  </div>
+                  <!-- Day Type Toggle -->
+                  <div class="time-range-pills" id="dna-daytype-group">
+                    <button class="range-pill active" data-daytype="weekday">Weekday Norm</button>
+                    <button class="range-pill" data-daytype="weekend">Weekend Norm</button>
+                  </div>
+                </div>
+              </div>
+              <div class="tm-chart-wrapper" style="position: relative;">
+                <canvas id="dnaCurveCanvas" width="900" height="210"></canvas>
+                <div id="dna-empty-overlay" style="display: none; position: absolute; inset: 0; background: rgba(11, 15, 25, 0.88); backdrop-filter: blur(4px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; border-radius: 8px;">
+                  <span style="font-size: 28px; margin-bottom: 8px;">🧬</span>
+                  <div style="font-weight: 700; font-size: 15px; color: #F1F5F9; margin-bottom: 6px;" id="dna-empty-title">Insufficient Historical Samples</div>
+                  <div style="font-size: 13px; color: #94A3B8; max-width: 620px; line-height: 1.5;" id="dna-empty-desc">Weekend profile requires at least 5 telemetry samples recorded on a Saturday or Sunday. 0 weekend samples exist in SQLite.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recurring Patterns & Congestion Windows -->
+            <div class="overview-dual-meters" style="margin-top: 16px;">
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">RECURRING CONGESTION WINDOW</span>
+                </div>
+                <div class="meter-main-val text-rose" id="dna-slow-window">--:00</div>
+                <div class="meter-note text-slate" id="dna-slow-desc">Identified from multi-day historical variances.</div>
+              </div>
+              <div class="meter-card">
+                <div class="meter-header">
+                  <span class="meter-label">PEAK EFFICIENCY WINDOW</span>
+                </div>
+                <div class="meter-main-val text-cyan" id="dna-peak-window">--:00</div>
+                <div class="meter-note text-slate" id="dna-peak-desc">Hour of day with highest average throughput.</div>
+              </div>
+            </div>
+
+          </div>
+        
+          </div>
+        </div>
+
+        <!-- Subtab 3: Black Box Flight Recorder -->
+        <div id="settings-tab-blackbox" class="subtab-content">
+          
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="header-title-box">
+                <span class="header-icon">📦</span>
+                <span class="header-text">INTERNET BLACK BOX (CONTINUOUS INCIDENT FLIGHT RECORDER)</span>
+              </div>
+              <button id="bb-gen-report-btn" class="action-pill-btn">
+                <span>📄 GENERATE DIAGNOSTIC REPORT</span>
+              </button>
+            </div>
+
+            <p class="section-desc">
+              Continuously runs automated ICMP heartbeats to Gateway (192.168.29.1) and DNS (1.1.1.1). Automatically logs root-cause evidence whenever network drops or latency spikes occur.
+            </p>
+
+            <div class="bb-heartbeat-strip">
+              <div class="hb-pod">
+                <span class="hb-label">GATEWAY REACHABILITY</span>
+                <div class="hb-val text-emerald" id="bb-gw-val">ONLINE (2 ms)</div>
+              </div>
+              <div class="hb-pod">
+                <span class="hb-label">EXTERNAL DNS (1.1.1.1)</span>
+                <div class="hb-val text-cyan" id="bb-dns-val">REACHABLE (16 ms)</div>
+              </div>
+              <div class="hb-pod">
+                <span class="hb-label">PACKET LOSS RATE</span>
+                <div class="hb-val text-emerald" id="bb-loss-val">0.0%</div>
+              </div>
+              <div class="hb-pod">
+                <span class="hb-label">ACTIVE STATUS</span>
+                <div class="hb-val text-emerald" id="bb-active-status">NO INCIDENTS</div>
+              </div>
+            </div>
+
+            <div class="bb-incidents-heading">RECORDED NETWORK INCIDENTS TIMELINE (SQLITE):</div>
+            <div class="table-scroll-container">
+              <table class="luxury-table">
+                <thead>
+                  <tr>
+                    <th>Incident ID</th>
+                    <th>Timestamp</th>
+                    <th>Severity</th>
+                    <th>Classification</th>
+                    <th>Evidence / Gateway</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="bb-incidents-tbody">
+                  <tr><td colspan="7" class="text-center text-slate">Scanning incident flight logs...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        
+        </div>
+      </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING DESKTOP MINI HUD (Compact Always-On-Top Mode) -->
+  <div id="desktop-mini-hud" class="mini-hud-window hidden">
+    <div class="mini-hud-drag-handle">
+      <span class="hud-brand">⚡ VORTEX MINI</span>
+      <button id="close-mini-hud-btn" class="hud-close">✕</button>
+    </div>
+    <div class="mini-hud-metrics">
+      <div class="hud-item text-cyan">
+        <span class="hud-lbl">DOWN</span>
+        <strong id="hud-down-val">33.3 Mbps</strong>
+      </div>
+      <div class="hud-item text-violet">
+        <span class="hud-lbl">UP</span>
+        <strong id="hud-up-val">9.2 Mbps</strong>
+      </div>
+      <div class="hud-item text-emerald">
+        <span class="hud-lbl">PING</span>
+        <strong id="hud-ping-val">16 ms</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK INTERNET CHECK MODAL -->
+  <div id="quick-check-modal" class="modal-overlay hidden">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-icon">🩺</span>
+          <span class="modal-title">QUICK 4-PILLAR INTERNET HEALTH CHECK</span>
+        </div>
+        <button id="close-quick-check-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="qc-status-banner" id="qc-status-banner">
+          <span class="qc-status-badge chip-online" id="qc-badge">OPTIMAL</span>
+          <span class="qc-summary" id="qc-summary">Probing local gateway, DNS resolvers, WAN edge, and CDN sinks...</span>
+        </div>
+        <div class="qc-pillars-grid">
+          <div class="qc-pillar-card">
+            <span class="qc-p-label">1. LOCAL GATEWAY</span>
+            <div class="qc-p-val text-cyan" id="qc-gw-val">-- ms</div>
+            <span class="qc-p-sub text-slate" id="qc-gw-sub">Target: 192.168.29.1</span>
+          </div>
+          <div class="qc-pillar-card">
+            <span class="qc-p-label">2. DNS RESOLUTION</span>
+            <div class="qc-p-val text-emerald" id="qc-dns-val">-- ms</div>
+            <span class="qc-p-sub text-slate" id="qc-dns-sub">Cloudflare Anycast</span>
+          </div>
+          <div class="qc-pillar-card">
+            <span class="qc-p-label">3. WAN INTERNET PING</span>
+            <div class="qc-p-val text-violet" id="qc-wan-val">-- ms</div>
+            <span class="qc-p-sub text-slate" id="qc-wan-sub">1.1.1.1 Backbone</span>
+          </div>
+          <div class="qc-pillar-card">
+            <span class="qc-p-label">4. HTTP CDN TRANSIT</span>
+            <div class="qc-p-val text-amber" id="qc-cdn-val">-- ms</div>
+            <span class="qc-p-sub text-slate" id="qc-cdn-sub">Cloudflare Edge (BOM)</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="qc-recheck-btn" class="retest-btn">🔄 Run Again</button>
+        <button id="qc-done-btn" class="action-pill-btn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NETWORK STATUS POPUP MODAL -->
+  <div id="net-status-modal" class="modal-overlay hidden">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-icon">📊</span>
+          <span class="modal-title">ACTIVE NETWORK ADAPTER &amp; TELEMETRY</span>
+        </div>
+        <button id="close-net-status-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="status-details-grid">
+          <div class="status-item"><span class="s-label">Active Adapter</span><strong class="s-val text-emerald" id="ns-adapter">--</strong></div>
+          <div class="status-item"><span class="s-label">Adapter Type</span><strong class="s-val text-slate" id="ns-type">Wi-Fi (802.11n MIMO)</strong></div>
+          <div class="status-item"><span class="s-label">Radio Channel / Band</span><strong class="s-val text-cyan" id="ns-channel">Channel 6 (2.4 GHz)</strong></div>
+          <div class="status-item"><span class="s-label">Local IPv4 Address</span><strong class="s-val text-violet font-mono" id="ns-local-ip">--</strong></div>
+          <div class="status-item"><span class="s-label">Default Gateway</span><strong class="s-val text-slate font-mono" id="ns-gateway-ip">--</strong></div>
+          <div class="status-item"><span class="s-label">DNS Resolvers</span><strong class="s-val text-slate font-mono" id="ns-dns">1.1.1.1, 1.0.0.1</strong></div>
+          <div class="status-item"><span class="s-label">Live Download Rate</span><strong class="s-val text-emerald font-mono" id="ns-live-down">-- Mbps</strong></div>
+          <div class="status-item"><span class="s-label">Live Upload Rate</span><strong class="s-val text-amber font-mono" id="ns-live-up">-- Mbps</strong></div>
+          <div class="status-item"><span class="s-label">Link Speed</span><strong class="s-val text-cyan font-mono" id="ns-link-speed">72.2 Mbps</strong></div>
+          <div class="status-item"><span class="s-label">Data Consumed Today</span><strong class="s-val text-violet font-mono" id="ns-today-data">-- GB</strong></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="ns-close-btn" class="action-pill-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL COMMAND PALETTE MODAL (Ctrl+K) -->
+  <div id="cmd-palette-modal" class="modal-overlay hidden">
+    <div class="cmd-palette-window">
+      <div class="cmd-palette-header">
+        <span class="cmd-icon" style="font-size: 1.2rem; color: #00f0ff;">🔍</span>
+        <input type="text" id="cmd-palette-input" class="cmd-palette-input" placeholder="Search modules, actions, tests, devices, or type a command..." autocomplete="off">
+        <button id="close-cmd-palette-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="cmd-palette-results" id="cmd-palette-results">
+        <!-- Results injected dynamically -->
+      </div>
+      <div class="cmd-palette-footer">
+        <span><kbd class="shortcut-kbd">↑</kbd> <kbd class="shortcut-kbd">↓</kbd> to navigate</span>
+        <span><kbd class="shortcut-kbd">↵</kbd> to select</span>
+        <span><kbd class="shortcut-kbd">Esc</kbd> to dismiss</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEYBOARD SHORTCUTS REFERENCE MODAL -->
+  <div id="shortcuts-modal" class="modal-overlay hidden">
+    <div class="modal-window" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-icon">⌨️</span>
+          <span class="modal-title">VORTEX SPEED KEYBOARD SHORTCUTS</span>
+        </div>
+        <button id="close-shortcuts-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="shortcuts-grid">
+          <div class="shortcut-row">
+            <span>Open Command Palette</span>
+            <kbd class="shortcut-kbd">Ctrl + K</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Retest Connection</span>
+            <kbd class="shortcut-kbd">R</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Cycle Theme Mode</span>
+            <kbd class="shortcut-kbd">T</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Open Backup &amp; Vault</span>
+            <kbd class="shortcut-kbd">B</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Overview Module</span>
+            <kbd class="shortcut-kbd">1</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Speed Diagnostics</span>
+            <kbd class="shortcut-kbd">2</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Device Radar &amp; Twin</span>
+            <kbd class="shortcut-kbd">4</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>NOVA Intelligence</span>
+            <kbd class="shortcut-kbd">5</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Settings &amp; Preferences</span>
+            <kbd class="shortcut-kbd">S</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span>Close Active Modal</span>
+            <kbd class="shortcut-kbd">Esc</kbd>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="shortcuts-done-btn" class="action-pill-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESTORE PREVIEW & CONFIRMATION MODAL -->
+  <div id="restore-confirm-modal" class="modal-overlay hidden">
+    <div class="modal-window" style="max-width: 540px; border-color: var(--amber);">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-icon">⚠️</span>
+          <span class="modal-title" style="color: var(--amber);">DATABASE RESTORE PREVIEW</span>
+        </div>
+        <button id="close-restore-modal-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12px; color: var(--text-pure); margin-bottom: 12px;">You are about to restore the active database from the following verified backup. An emergency safety copy of your current database will be saved before swapping.</p>
+        <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;"><span class="text-slate">Backup File:</span><strong id="rest-filename" class="text-cyan">--</strong></div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;"><span class="text-slate">Created Date:</span><strong id="rest-date" class="text-pure">--</strong></div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;"><span class="text-slate">Speed Tests Count:</span><strong id="rest-speed-count" class="text-emerald">--</strong></div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;"><span class="text-slate">Telemetry Samples:</span><strong id="rest-tele-count" class="text-violet">--</strong></div>
+          <div style="display: flex; justify-content: space-between;"><span class="text-slate">Integrity Check:</span><strong id="rest-integrity" class="text-emerald">VERIFIED OK</strong></div>
+        </div>
+        <div style="font-size: 11px; color: var(--rose); font-weight: 600;">Type CONFIRM_RESTORE to authorize restoration:</div>
+        <input type="text" id="restore-confirm-token-input" class="luxury-input" placeholder="Type CONFIRM_RESTORE" style="width: 100%; margin-top: 6px;" autocomplete="off">
+      </div>
+      <div class="modal-footer">
+        <button id="execute-restore-btn" class="retest-btn" style="background: var(--amber); border-color: var(--amber); color: #000;">⚠️ Confirm &amp; Restore</button>
+        <button id="cancel-restore-btn" class="action-pill-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Application Script -->
+  <script src="app.js?v=8.1"></script>
+</body>
+</html>

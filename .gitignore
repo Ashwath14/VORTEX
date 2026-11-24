@@ -1,0 +1,47 @@
+# Operating System & Environment
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+*.bak
+
+# Logs
+*.log
+startup.log
+startup_run.log
+test_run.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node.js
+node_modules/
+.npm/
+
+# Ephemeral SQLite WAL & SHM runtime files
+*.db-wal
+*.db-shm
+*.db-journal
+
+# Temporary Chromium / Edge Profiles
+vortex_profile/
+vortex_profile_cdp/
+vortex_profile*/
+
+# Scratch Test Scripts & Intermediate Artifacts
+scratch/
+
+# Local Recovery Backups
+backup_pre_simplification_*/
+backup_stage1_*/
+recovery_backup_*/
+vortex-speed/backups/*.db
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

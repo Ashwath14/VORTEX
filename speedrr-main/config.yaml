@@ -1,0 +1,150 @@
+# Speedrr Configuration File
+# https://github.com/itschasa/speedrr
+
+
+# Directory to store logs
+logs_path: ./logs/
+
+# Units to be used for all speed values
+# Options (smallest to largest):
+# - bit   = bit/s,    bits per second
+# - B     = B/s,      bytes per second
+# - Kbit  = Kbit/s,   kilobits per second
+# - Kibit = Kibit/s,  kibibits per second
+# - KB    = KB/s,     kilobytes per second
+# - KiB   = KiB/s,    kibibytes per second
+# - Mbit  = Mbit/s,   megabits per second
+# - Mibit = Mibit/s,  mebibits per second
+# - MB    = MB/s,     megabytes per second
+# - MiB   = MiB/s,    mebibytes per second
+# - Gbit  = Gbit/s,   gigabits per second
+# - Gibit = Gibit/s,  gibibits per second
+# - GB    = GB/s,     gigabytes per second
+# - GiB   = GiB/s,    gibibytes per second
+# Full unit names (e.g. kilobyte) can be used as well
+# Note: Capitalization matters for the acronyms above.
+units: Mbit
+
+# The minimum upload speed allowed on your torrent client.
+# Note: Most torrent clients won't allow you to set the upload speed to 0,
+#       so the actual minimum upload speed will be 1 Byte/s.
+min_upload: 8
+
+# The maximum upload speed allowed on your torrent client.
+# This should be around 70-80% of your total upload speed.
+max_upload: 15
+
+# The minimum download speed allowed on your torrent client.
+# Note: Most torrent clients won't allow you to set the upload speed to 0,
+#       so the actual minimum upload speed will be 1 Byte/s.
+min_download: 10
+
+# The maximum download speed allowed on your torrent client.
+# This should be around 70-100% of your total download speed.
+max_download: 100
+
+manual_speed_algorithm_share: false # Set speed based on manually configured shares instead of using number of active torrents
+
+# The torrent clients to be used by Speedrr
+# Note: If you have multiple clients, Speedrr will split the upload speed between them, based on the number of seeding+downloading torrents.
+clients:
+  # The type of torrent client
+  # Options: qbittorrent, transmission
+  - type: qbittorrent
+
+    # The URL to your torrent client
+    url: <webui_url>
+
+    # The username and password to access your torrent client
+    username: <username>
+    password: <password>
+
+    # Number of shares of total upload and download speed. Ignored if manual_speed_algorithm_share is set to false
+    download_shares: 1
+    upload_shares: 1
+
+    # Whether to verify the SSL certificate of the torrent client
+    # If you are unsure what this means, leave it as is.
+    # Only has an influence on qbittorrent
+    https_verify: true
+
+
+# These are the modules that Speedrr will use to determine what upload speed to set.
+modules:
+
+  # For monitoring Plex/Jellyfin/Emby streams, via Plex, Jellyfin, Emby, or Tautulli
+  # Uses the bandwidth of the streams to determine how much upload speed to deduct.
+  media_servers:
+    # Supports multiple servers
+    # Note: You should only use either plex or tautulli for every Plex Media Server you have.
+    
+    # The type of server to get data from
+    # Options: plex, tautulli, jellyfin, emby
+    - type: <server_type>
+
+      # The URL to your Plex/Tautulli/Jellyfin/Emby server
+      url: <server_url>
+
+      # PLEX ONLY, the token to access your Plex server
+      # Help: https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
+      token: <plex_x_token>
+
+      # TAUTULLI JELLYFIN AND EMBY ONLY, the API key to access your Tautulli/Jellyfin/Emby server
+      # Tautulli: Settings > Web Interface > API > API key
+      # Jellyfin/Emby: Dashboard > Advanced > API Keys > +
+      api_key: <api_key>
+
+      # Whether to verify the SSL certificate of the Plex/Tautulli server
+      # If you are unsure what this means, leave it as is.
+      https_verify: true
+      
+      # Bandwidth reported by Plex is multiplied by this value
+      # Plex will reserve a higher bandwidth than the actual stream requires all the time,
+      # so this value is used to reduce the reported bandwidth, if you want to.
+      bandwidth_multiplier: 1.0
+
+      # The interval in seconds to update the Plex stream data
+      update_interval: 5
+
+      # Checks if a stream matches any of the given conditions, and if it does, it will ignore it from calculations
+      ignore_streams:
+        
+        # Whether to ignore all local streams (i.e. streams from IP addresses considered private)
+        local: true
+        
+        # Optional list of IP networks to ignore
+        # Each network should consist of an IP address and an optional netmask, separated by a slash
+        # If no mask is provided, it's considered to be /32
+        # Example: 192.168.0.0/24, 192.168.1.123
+        ip_networks:
+        
+        # After a stream has been paused for this amount of seconds, it will be ignored from calculations
+        # Note: To disable this feature, set to -1.
+        paused_after: 300
+  
+
+  # Changes the upload/download speed based on the time of day, and what day of the week
+  # Note: Recommended to use to set your upload speed to be lower during the day,
+  #       when lots of users are using your internet.
+  # Note: Supports multiple schedules.
+  schedule:
+    # The start and end time of the schedule, in 24-hour format
+    # Note: Uses your machine's local timezone.
+    - start: "05:00"
+      end: "23:30"
+
+      # The days of the week to apply the schedule to
+      # Options: all, mon, tue, wed, thu, fri, sat, sun
+      # Note: If your end time goes past midnight, you should add the next day as well.
+      days: [all]
+
+      # The upload speed deducted in this time period.
+      # Note: This can be a percentage of the maximum or a fixed value (uses units specified at the top of config).
+      # Example: 50%, 10, 5, 80%, 20%, 0
+      upload: 60%
+
+      # The download speed deducted in this time period.
+      # Note: This can be a percentage of the maximum or a fixed value (uses units specified at the top of config).
+      # Example: 50%, 10, 5, 80%, 20%, 0
+      download: 40%
+
